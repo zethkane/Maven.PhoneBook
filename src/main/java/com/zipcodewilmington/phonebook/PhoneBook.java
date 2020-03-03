@@ -1,5 +1,6 @@
 package com.zipcodewilmington.phonebook;
 
+import java.lang.reflect.Array;
 import java.util.*;
 
 /**
@@ -7,20 +8,14 @@ import java.util.*;
  */
 public class PhoneBook {
 
-    private Map<String, List<String>> myPhoneBook;
+    private Map<String, List<String>> myPhoneBook = new HashMap<>();
 
 
     public PhoneBook(Map<String, List<String>> map) {
-        if(!map.isEmpty()){
-            myPhoneBook.putAll(map);
-        }
-        else {
-            this.myPhoneBook = new HashMap<>();
-        }
     }
 
     public PhoneBook() {
-        this.myPhoneBook = new HashMap<>();
+
     }
 
     public void add(String name, String phoneNumber) {
@@ -32,28 +27,25 @@ public class PhoneBook {
     public void addAll(String name, String... phoneNumbers) {
         ArrayList<String> numbers = new ArrayList<>();
         if(phoneNumbers != null){
-            for (String names: phoneNumbers) {
-                numbers.add(names);
+            for (String nums: phoneNumbers) {
+                numbers.add(nums);
             }
+            myPhoneBook.put(name, numbers);
         }
-        this.myPhoneBook.put(name, numbers);
-
-
     }
 
     public void remove(String name) {
-        myPhoneBook.remove(name);
+        if(myPhoneBook.containsKey(name)){
+            myPhoneBook.remove(name);
+        }
     }
 
     public Boolean hasEntry(String name) {
-        if(myPhoneBook.containsKey(name)){
-        return true;}
-        else{ return false;}
+        return myPhoneBook.containsKey(name);
     }
 
     public List<String> lookup(String name) {
-
-        return null;
+        return myPhoneBook.get(name);
     }
 
     public String reverseLookup(String phoneNumber)  {
@@ -62,8 +54,11 @@ public class PhoneBook {
     }
 
     public List<String> getAllContactNames() {
-//        myPhoneBook.
-        return null;
+        String name = "";
+        name += myPhoneBook.keySet();
+        List<String> names = new ArrayList<>();
+
+        return names;
     }
 
     public Map<String, List<String>> getMap() {
