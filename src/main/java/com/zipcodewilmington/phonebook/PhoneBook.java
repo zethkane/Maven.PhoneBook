@@ -8,10 +8,11 @@ import java.util.*;
  */
 public class PhoneBook {
 
-    private Map<String, List<String>> myPhoneBook = new HashMap<>();
+    private Map<String, List<String>> myPhoneBook = new LinkedHashMap<>();
 
 
     public PhoneBook(Map<String, List<String>> map) {
+        this.myPhoneBook = map;
     }
 
     public PhoneBook() {
@@ -41,7 +42,7 @@ public class PhoneBook {
     }
 
     public Boolean hasEntry(String name) {
-        return myPhoneBook.containsKey(name);
+        return false;
     }
 
     public List<String> lookup(String name) {
@@ -49,19 +50,22 @@ public class PhoneBook {
     }
 
     public String reverseLookup(String phoneNumber)  {
-
-        return null;
+        String result = "";
+        if(myPhoneBook.containsValue(phoneNumber)){
+           result += myPhoneBook.entrySet();
+        return result;}
+        else {return null;}
     }
 
     public List<String> getAllContactNames() {
-        String name = "";
-        name += myPhoneBook.keySet();
-        List<String> names = new ArrayList<>();
-
+        ArrayList<String> names = new ArrayList<>();
+        for (String key: myPhoneBook.keySet()) {
+            names.add(key);
+        }
         return names;
     }
 
     public Map<String, List<String>> getMap() {
-        return null;
+        return myPhoneBook;
     }
 }
